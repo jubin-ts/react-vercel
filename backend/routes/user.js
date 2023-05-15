@@ -1,17 +1,50 @@
-const express = require ('express')
+// const express = require ('express')
 
-// controller functions
+// // controller functions
 
-const { signupUser,loginUser }  = require ('../controllers/usercontroller')
+// const { signupUser,loginUser }  = require ('../controllers/usercontroller')
 
-const router = express.Router()
+// const router = express.Router()
 
-// login route
+// router.get('/login',loginUser)
+// router.get('/signup',signupUser)
 
-router.post('/login',loginUser)
+// // login route
 
-// signup route
+// router.post('/login',loginUser)
 
-router.post('/signup',signupUser)
+// // signup route
 
-module.exports = router
+// router.post('/signup',signupUser)
+
+// module.exports = router
+
+
+const express = require('express');
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+
+// Import controller functions
+const { signupUser, loginUser } = require('../controllers/usercontroller');
+
+const router = express.Router();
+
+// Google authentication route
+router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+// Google authentication callback route
+router.get('/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect to homepage or wherever you want to redirect
+    res.redirect('http://localhost:3000/home');
+  }
+);
+
+// Login route
+router.post('/login', loginUser);
+
+// Signup route
+router.post('/signup', signupUser);
+
+module.exports = router;

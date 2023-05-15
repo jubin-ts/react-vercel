@@ -1,0 +1,50 @@
+// const User = require ('../Model/G_userModel')
+// const jwt = require ('jsonwebtoken')
+
+// const createToken = (_id) => {
+//   return  jwt.sign({_id}, process.env.SECRET , {expiresIn:'3d'})
+// }
+
+// //login user
+
+// const G_loginUser = async (req,res) => {
+//     const {email, password} = req.body
+
+//     try {
+//         const G_user = await G_user.login(email,password)
+
+//         //create token
+
+//         const token = createToken(G_user._id)
+
+//         res.status(200).json({email,token})
+//     } catch (error) {
+//         res.status(400).json({error:error.message})
+//     }
+// }
+
+
+
+
+// //signup user
+
+// const G_signupUser = async (req,res) => {
+//     const {email,password} = req.body 
+
+
+//     try {
+//         const G_user = await G_user.signup(email,password)
+
+//         //create token
+
+//         const token = createToken(G_user._id)
+
+//         res.status(200).json({email,token})
+//     } catch (error) {
+//         res.status(400).json({error:error.message})
+//     }
+    
+// }
+
+
+// module.exports = { G_signupUser , G_loginUser}

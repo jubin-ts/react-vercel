@@ -1,12 +1,12 @@
-const Note = require('../Model/NoteModel')
+const Clients = require('../Model/NoteModel')
 const mongoose = require ('mongoose')
 
 //get all notes 
 
 const getNotes = async (req,res) => {
-    const notes = await Note.find({}).sort({createdAt: -1})
+    const client = await Clients.find({}).sort({createdAt: -1})
 
-    res.status(200).json(notes)
+    res.status(200).json(client)
 }
 
 // get single note 
@@ -16,24 +16,24 @@ const getNote = async (req,res) => {
      if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({error:'no notes found'})
      }
-    const note = await Note.findById(id)
+    const client = await Clients.findById(id)
 
-    if (!note) {
+    if (!client) {
         return res.status(404).json({error:'no notes found'})
     }
-    res.status(200).json(note)
+    res.status(200).json(client)
 }
 
 
 // create a note
 
 const createNote = async (req,res) => {
-    const { title,description} = req.body
+    const { name,email,mobile} = req.body
 // adding doccument to db
 
     try {
-       const note = await Note.create({title,description})
-       res.status(200).json(note)
+       const client = await Clients.create({name,email,mobile})
+       res.status(200).json(client)
     } catch (error) {
         res.status(400).json({error: error.message})
     }
@@ -48,12 +48,12 @@ const deleteNote = async (req,res) => {
         return res.status(404).json({error:'no notes found'})
      }
 
-    const note = await Note.findByIdAndDelete({_id:id})
+    const client = await Clients.findByIdAndDelete({_id:id})
 
-    if (!note) {
+    if (!client) {
         return res.status(404).json({error:'no notes found'})
     }
-    res.status(200).json(note)
+    res.status(200).json(client)
 }
 
 
@@ -68,14 +68,14 @@ const updateNote = async (req,res) => {
         return res.status(404).json({error:'no notes found'})
      }
 
-     const note = await Note.findByIdAndUpdate({_id:id}, {
+     const client = await Clients.findByIdAndUpdate({_id:id}, {
         ...req.body
      })
 
-     if (!note) {
+     if (!client) {
         return res.status(404).json({error:'no notes found'})
     }
-    res.status(200).json(note)
+    res.status(200).json(client)
 } 
 
 

@@ -6,14 +6,18 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const noteSchema = new Schema ({
-    title: {
+    name: {
         type:String
     },
-    description: {
+    email: {
         type:String
+    },
+    mobile: {
+        type:Number
     }
+
 
 },{timestamps:true})
 
-module.exports = mongoose.model('Note', noteSchema)
+module.exports = mongoose.model('Clients', noteSchema)
 
